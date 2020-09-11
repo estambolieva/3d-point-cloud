@@ -106,7 +106,8 @@ python3
 > 
 ```
 
-
+https://vtk.org/download/
+https://discourse.vtk.org/t/installing-vtk-in-ubuntu-18-04/2147/3
 
 
 ## Viewing the Data
@@ -119,6 +120,14 @@ To start displaz, type in the terminal the following independent of the folder i
 
 ```sh
 displaz
+```
+
+### Visualizing .pcd data
+
+```sh
+sudo apt-get install pcl-tools 
+
+pcl_viewer multiview 1 ./path_to.pcd 
 ```
 
 ## Labelling the Data
@@ -195,3 +204,113 @@ Installation Instructions
 Python Packages
 
 1. Las2Pcd Github Page [here](https://github.com/murtiad/las2pcd)
+
+
+
+sudo aptitude install libpcl-dev -y
+pip3 install python-pcl
+
+Error:
+ImportError: libpcl_surface.so.1.7: cannot open shared object file: No such file or directory
+
+sudo aptitude install libpcl-dev=1.7.2-14build1
+
+download python-pcl tar.gz from there: https://github.com/strawlab/python-pcl/archive/v0.3.0rc1.tar.gz
+
+image from GIMP
+
+```sh
+sudo aptitude install libpcl-dev=1.7.2-14build1
+sudo apt install pcl-tools
+sudo apt-get update -y 
+sudo apt-get install -y cython
+pip3 install cython
+pip3 install numpy
+sudo apt-get install libpq-dev python3-dev build-essential libxml2-dev libxslt1-dev libldap2-dev libsasl2-dev libffi-dev
+
+>>>>>>>
+>python3 setup.py install
+>setup.py: error: cannot find PCL, tried
+>    pkg-config pcl_common-1.8
+>    pkg-config pcl_common-1.7
+>    pkg-config pcl_common-1.6
+>    pkg-config pcl_common
+
+
+# check all libraries installed
+pkg-config --list-all
+```
+
+https://github.com/PointCloudLibrary/pcl/archive/pcl-1.11.1.tar.gz
+& how to compile: https://pcl-tutorials.readthedocs.io/en/latest/compiling_pcl_posix.html
+
+
+metslib
+```sh
+# install instructions here: https://kezunlin.me/post/137aa5fc/
+wget https://www.coin-or.org/download/source/metslib/metslib-0.5.3.tgz
+tar xzvf metslib-0.5.3.tgz
+cd metslib-0.5.3
+./configure
+make
+sudo make install
+```
+
+[VTK](https://vtk.org/Wiki/VTK/Building/Linux)
+```sh
+git clone https://gitlab.kitware.com/vtk/vtk.git
+mkdir VTK-build # this is at the same level as the vtk git repo dir - not a child of it!!
+cd VTK-build
+cmake -DCMAKE_BUILD_TYPE:STRING=Release ../vtk/
+
+# update cmake # download page: https://cmake.org/download/
+wget https://github.com/Kitware/CMake/releases/download/v3.18.2/cmake-3.18.2.tar.gz
+tar xvf cmake-3.18.2.tar.gz
+cd cmake-3.18.2
+./configure
+make
+sudo make install
+sudo ln -s /usr/local/bin/cmake /usr/bin # so that cmake --version can find cname in /usr/bin/cmake
+
+# get Q5 https://vtk.org/Wiki/VTK/Building/Linux
+wget http://download.qt-project.org/official_releases/qt/5.15/5.15.1/single/qt-everywhere-src-5.15.1.tar.xz
+tar -xf qt-everywhere-src-5.15.1.tar.xz
+cd qt-everywhere-src-5.15.1
+./configure
+make -j2
+sudo make install
+
+FINISHED HERE... STILL TASKS TO DO...
+```
+
+```sh
+sudo apt-get install libeigen3-dev
+tar xvf pcl-pcl-1.11.1.tar.gz
+cd pcl-pcl-1.11.1 && mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DBUILD_visualization=ON #cmake .. NEED TO INSTALL VTK FOR VISUALIZATION
+# -- Could NOT find Pcap (missing: PCAP_LIBRARIES PCAP_INCLUDE_DIRS) 
+#  Could not find a package configuration file provided by "VTK" with any of
+#  the following names:
+
+#   VTKConfig.cmake
+#   vtk-config.cmake
+make -j2
+sudo make -j2 install
+
+> successfully installed.
+```
+
+```sh
+conda install -c sirokujira python-pcl --channel conda-forge
+```
+
+UnsatisfiableError: The following specifications were found
+to be incompatible with the existing python installation in your environment:
+
+Specifications:
+
+  - python-pcl -> python[version='>=2.7,<2.8.0a0|>=3.6,<3.7.0a0|>=3.5,<3.6.0a0']
+
+Your python: python=3.8	
+
+
